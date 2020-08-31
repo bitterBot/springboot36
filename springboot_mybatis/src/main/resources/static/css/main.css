@@ -1,0 +1,123 @@
+/*
+      Created by Keith Donegan of Code-Sucks.com
+	  
+	  E-Mail: Keithdonegan@gmail.com
+	  
+	  You can do whatever you want with these layouts,
+	  but it would be greatly appreciated if you gave a link
+	  back to http://www.code-sucks.com
+	  
+*/
+
+* { padding: 0; margin: 0; }
+
+@font-face {
+	font-family: 'DungGeunMo';
+	src:url('../fonts/DungGeunMo.eot');
+	src:url('../fonts/DungGeunMo.ttf');
+	src:url('../fonts/DungGeunMo.woff');
+}
+
+body, html {cursor: url('../img/cursor.png'), auto;}
+
+a{cursor: url('../img/cursor-click.png'), auto;}
+
+body {
+ background-image:url('../img/night.jpg');
+ background-repeat:repeat;
+ font-family: DungGeunMo !important;
+ font-size: 17px !important;
+}
+#wrapper { 
+ margin: 0 auto;
+ width: 1240px;
+
+}
+#header {
+ color: #333;
+ width: 100%;
+ padding: 2%;
+ height: 200px;
+ margin: 30px 0px;
+ background: #53bbe8;
+}
+#container {
+	width:100%;
+	display:inline-block;
+	position:relative;
+}
+#leftcolumn { 
+ color: #333;
+ background: #00A2E8;
+ padding: 10px;
+ height: 100%;
+ width: 18%;
+ margin-right:2%;
+ float:left;
+}
+#rightcolumn {
+ width: 80%;
+ display:inline-block;
+}
+#footer { 
+ width: 100%;
+ color: #333;
+ background: #3288ad;
+ margin: 30px 0px;
+ padding: 2%;
+}
+.styleImg{
+	width:47.5%;
+	height:0;
+	padding-bottom:47.5%;
+	margin-right:5%;
+	margin-bottom:5%;
+	background-color:#00A2E8;
+	text-align:center;
+	float:left;
+	position:relative;
+	cursor: url('../img/cursor-click.png'), auto;
+}
+
+.styleImg img{
+	width:300px;
+	height:200px;
+	margin:50px 0;
+}
+
+.styleImg div{
+	position:absolute;
+	width:250px;
+	height:50px;
+	right:10px;
+	bottom:10px;
+	font-size:27px;
+	word-break:keep-all;
+}
+	
+.styleImg:nth-child(2n+1){
+	margin-right:0;
+}
+
+.styleImg:nth-child(3n+1){
+	margin-bottom:0;
+}
+
+.carousel{
+	margin-bottom:30px;
+	text-align:center;
+}
+
+.carousel img{
+	width:100%;
+	height:300px !important;
+}
+
+.fixed_top{
+	position: sticky;
+	top: 0;
+}
+.scroll{
+	height:600px;
+	overflow-y:scroll;
+}

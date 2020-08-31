@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+	  
+	  <th:block layout:fragment="customCss"></th:block>
+	  <th:block layout:fragment="customTitle">
+	  	<title th:text="${title}"></title>
+	  </th:block>
+	  <th:block layout:fragment="customJs"></th:block>
+	  <th:block layout:fragment="customContent">
+	  <div th:replace="member/memberSearchForm :: searchFormFragment"></div><br>
+	  
+	  <div class="scroll">	
+	  	<table class="table">
+	  		<thead>
+	  			<tr class="success">
+	  				<th class="fixed_top">아이디</th>
+	  				<th class="fixed_top">비밀번호</th>
+	  				<th class="fixed_top">이름</th>
+	  				<th class="fixed_top">권한</th>
+	  				<th class="fixed_top">권한명</th>
+	  				<th class="fixed_top">이메일</th>
+	  				<th class="fixed_top">주소</th>
+	  				<th class="fixed_top">가입일</th>
+	  				<th class="fixed_top">수정</th>
+	  				<th class="fixed_top">삭제</th>
+	  			</tr>
+	  		</thead>
+	  		<tbody>
+	  			<tr class="info" th:each="l : ${memberList}">
+	  				<td th:text="${l.memberId}"></td>
+	  				<td th:text="${l.memberPw}"></td>
+	  				<td th:text="${l.memberName}"></td>
+	  				<td th:text="${l.memberLevel}"></td>
+	  				<td th:text="${l.memberLevelName}"></td>
+	  				<td th:text="${l.memberEmail}"></td>
+	  				<td th:text="${l.memberAddr}"></td>
+	  				<td th:text="${l.memberRegDate}"></td>
+	  				<td><a th:href="@{/modifyMember(memberId=${l.memberId})}">수정</a></td>
+	  				<td><a th:href="@{/deleteMember(memberId=${l.memberId})}">삭제</a></td>
+	  			</tr>
+	  		</tbody>
+	  	</table>
+	  </div>
+	  </th:block>
+	  <th:block layout:fragment="customJsScript"></th:block>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+	  
+	  <th:block layout:fragment="customCss"></th:block>
+	  <th:block layout:fragment="customTitle">
+	  	<title th:text="${title}"></title>
+	  </th:block>
+	  <th:block layout:fragment="customJs"></th:block>
+	  <th:block layout:fragment="customContent">
+	  	
+	  	<!-- carousel start -->
+	  	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+		  <!-- Indicators -->
+		  <ol class="carousel-indicators">
+		    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+		    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+		    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+		    <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+		  </ol>
+		
+		  <div class="carousel-inner" role="listbox">
+		    <div class="item active">
+		      <img src="./img/image1.jpg" alt="image1">
+		      <div class="carousel-caption">
+		        
+		      </div>
+		    </div>
+		    <div class="item">
+		      <img src="./img/image2.gif" alt="image2">
+		      <div class="carousel-caption">
+		        
+		      </div>
+		    </div>
+		    <div class="item">
+		      <img src="./img/image3.gif" alt="image3">
+		      <div class="carousel-caption">
+		        
+		      </div>
+		    </div>
+		    <div class="item">
+		      <img src="./img/image4.gif" alt="image4">
+		      <div class="carousel-caption">
+		        
+		      </div>
+		    </div>
+		  </div>
+		
+		  <!-- Controls -->
+		  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+
+		  </a>
+		  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+
+		  </a>
+		</div>
+		<!-- carousel end -->
+	  	
+	  	<div class="styleImg">
+	  		<img src="./img/game.jpg" alt="game">
+	  		<div>2000's Game<br></div>
+	  	</div>
+	  	<div class="styleImg">
+	  		<img src="./img/radio.jpg" alt="music">
+	  		<div>2000's Music<br></div>
+	  	</div>
+	  	<div class="styleImg">
+	  		<img src="./img/login.png" alt="worldcup">
+	  		<div>2000's WorldCup<br></div>
+	  	</div>
+	  	<div class="styleImg">
+	  		<img src="./img/ghost.png" alt="another">
+	  		<div>2000's ..<br> </div>
+	  	</div>
+	  </th:block>
+	  <th:block layout:fragment="customJsScript"></th:block>
+</html>

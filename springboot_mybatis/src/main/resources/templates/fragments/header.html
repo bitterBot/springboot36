@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	
+	<!-- start header -->
+	<div id="header" th:fragment="headerFragment">
+		<!-- 
+		권한별 메뉴
+		관리자 : 전체회원, 상품등록, 상품검색, 로그아웃
+		판매자 : 상품등록, 상품검색, 로그아웃
+		구매자 : 상품검색, 로그아웃
+		비회원 : 회원가입, 로그인 -->
+		<div>
+		header.html<br>
+		상단메뉴<br><br>
+		</div>
+		<a th:if="${session.SID eq null}" href="/addMember">회원가입</a>
+		<a th:if="${session.SLEVEL eq 1}" href="/getMemberList">전체회원</a>
+		<a th:if="${session.SLEVEL eq 1}" href="/getLoginHistory">로그인로그</a>
+		<a th:if="${session.SLEVEL <= 2 and session.SID ne null}" href="/addGoods">상품등록</a>
+		<a th:if="${session.SLEVEL <= 3 and session.SID ne null}" href="/getGoodsList">상품검색</a>
+		<a th:if="${session.SID eq null}" href="/login" style="float:right;">로그인</a>
+		<a th:if="${session.SID ne null}" href="/logout" style="float:right;">로그아웃</a>
+	</div>
+	<!-- end header -->
+</html>

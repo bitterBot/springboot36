@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart36.mybatis.mapper.GoodsMapper">
+	<resultMap type="Goods" id="goodsResultMap">
+		<result column="g_code" property="goodsCode"/>
+		<result column="g_name" property="goodsName"/>
+		<result column="g_price" property="goodsPrice"/>
+		<result column="g_seller_id" property="goodsSellerId"/>
+		<result column="m_name" property="goodsSellerName"/>
+		<result column="g_reg_date" property="goodsRegDate"/>
+	</resultMap>
+	<select id="searchGoods" parameterType="String" resultType="Goods" resultMap="goodsResultMap">
+		SELECT
+			 g_code
+			,g_name
+			,g_price
+			,g_seller_id
+			,g_reg_date
+			,m_name
+		FROM
+			tb_goods a
+		INNER join
+			tb_member b
+		ON
+		a.g_seller_id = b.m_id
+		<if test="cate != null and flag != null">
+			<if test="flag neq ''.toString()">
+				WHERE
+					${cate} like '%${flag}%'
+			</if>
+		</if>
+	</select>
+	
+	<delete id="deleteOrder" parameterType="String">
+		DELETE FROM
+			tb_order
+		WHERE
+			o_g_code = #{goodsCode}
+	</delete>
+	
+	<delete id="deleteGoods" parameterType="String">
+		DELETE FROM
+			tb_goods
+		WHERE
+			g_code = #{goodsCode}
+	</delete>
+	
+	<update id="updateGoods" parameterType="Goods">
+		UPDATE
+			tb_goods
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="goodsName != null and goodsName neq ''.toString()">
+				g_name = #{goodsName}
+			</if>
+			<if test="goodsPrice != null and goodsPrice neq ''.toString()">
+				,g_price = #{goodsPrice}
+			</if>
+		</trim>
+		WHERE
+			g_code = #{goodsCode}
+	</update>
+	
+	<insert id="addGoods" parameterType="Goods">
+		<selectKey resultType="string" keyProperty="goodsCode" order="BEFORE">
+	        <![CDATA[ 
+		        SELECT 
+		        	CASE
+		        	WHEN ((max(CAST(substring(g_code,2) AS DECIMAL))+1)<10)
+		        	THEN CONCAT('g00', MAX(CAST(SUBSTRING(g_code,2) AS DECIMAL))+1)
+		        	WHEN ((max(CAST(substring(g_code,2) AS DECIMAL))+1)<100)
+		        	THEN CONCAT('g0', MAX(CAST(SUBSTRING(g_code,2) AS DECIMAL))+1)
+		        	ELSE CONCAT('g', MAX(CAST(SUBSTRING(g_code,2) AS DECIMAL))+1)
+		        	END AS goodsCode
+		        FROM 
+		        	tb_goods 
+	        ]]>       
+	    </selectKey>
+		INSERT INTO
+			tb_goods
+			(g_code, g_name, g_price, g_seller_id, g_reg_date)
+		VALUES(
+			 #{goodsCode}
+			,#{goodsName}
+			,#{goodsPrice}
+			,#{goodsSellerId}
+			,NOW()
+		)
+	</insert>
+	
+	<select id="getGoodsInfo" parameterType="String" resultType="Goods" resultMap="goodsResultMap">
+		SELECT
+			 g_code
+			,g_name
+			,g_price
+			,g_seller_id
+			,g_reg_date
+			,m_name
+		FROM
+			tb_goods a
+		INNER JOIN
+			tb_member b
+		ON
+			a.g_seller_id = b.m_id
+		WHERE
+			g_code = #{goodsCode}
+	</select>
+	
+	<select id="getGoodsList" resultType="Goods" resultMap="goodsResultMap">
+		SELECT
+			 g_code
+			,g_name
+			,g_price
+			,g_seller_id
+			,g_reg_date
+			,m_name
+		FROM
+			tb_goods a
+		INNER JOIN
+			tb_member b
+		ON
+			a.g_seller_id = b.m_id
+		ORDER BY
+			g_code
+	</select>
+
+</mapper>

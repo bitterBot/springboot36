@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+	  
+	  <th:block layout:fragment="customCss"></th:block>
+	  <th:block layout:fragment="customTitle">
+	  	<title th:text="${title}"></title>
+	  </th:block>
+	  <th:block layout:fragment="customJs"></th:block>
+	  <th:block layout:fragment="customContent">
+	  	<form action="/addGoods" method="post">
+		  	<table class="table">
+	  			<tr>
+	  				<td class="success">상품명</td>
+	  				<td class="info"><input type="text" name="goodsName"></td>
+	  			</tr>
+	  			<tr>
+	  				<td class="success">가격</td>
+	  				<td class="info"><input type="number" name="goodsPrice">
+	  				<input type="hidden" name="goodsSellerId" th:value="${session.SID}">
+	  				</td>
+	  			</tr>
+	  			<tr>
+	  				<td class="warning" style="text-align:center;" colspan="2"><input type="submit" value="상품등록"></td>
+	  			</tr>
+		  	</table>
+	  	</form>
+	  </th:block>
+	  <th:block layout:fragment="customJsScript"></th:block>
+</html>

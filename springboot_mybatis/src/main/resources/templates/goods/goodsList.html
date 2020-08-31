@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+	  
+	  <th:block layout:fragment="customCss"></th:block>
+	  <th:block layout:fragment="customTitle">
+	  	<title th:text="${title}"></title>
+	  </th:block>
+	  <th:block layout:fragment="customJs"></th:block>
+	  <th:block layout:fragment="customContent">
+	  <div th:replace="goods/goodsSearchForm :: searchFormFragment"></div><br>
+	  
+	  <div class="scroll">	
+	  	<table class="table">
+	  		<thead>
+	  			<tr class="success">
+	  				<th class="fixed_top">상품코드</th>
+	  				<th class="fixed_top">상품명</th>
+	  				<th class="fixed_top">상품가격</th>
+	  				<th class="fixed_top">판매자아이디</th>
+	  				<th class="fixed_top">판매자명</th>
+	  				<th class="fixed_top">게시일</th>
+	  				<th class="fixed_top">수정</th>
+	  				<th class="fixed_top">삭제</th>
+	  			</tr>
+	  		</thead>
+	  		<tbody>
+	  			<tr class="info" th:each="l : ${goodsList}">
+	  				<td th:text="${l.goodsCode}"></td>
+	  				<td th:text="${l.goodsName}"></td>
+	  				<td th:text="${l.goodsPriceComma}"></td>
+	  				<td th:text="${l.goodsSellerId}"></td>
+	  				<td th:text="${l.goodsSellerName}"></td>
+	  				<td th:text="${l.goodsRegDate}"></td>
+	  				<td><a th:href="@{/modifyGoods(goodsCode=${l.goodsCode})}">수정</a></td>
+	  				<td><a th:href="@{/deleteGoods(goodsCode=${l.goodsCode})}">삭제</a></td>
+	  			</tr>
+	  		</tbody>
+	  	</table>
+	  </div>
+	  </th:block>
+	  <th:block layout:fragment="customJsScript"></th:block>
+</html>

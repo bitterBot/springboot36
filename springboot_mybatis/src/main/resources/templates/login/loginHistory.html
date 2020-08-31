@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+	  
+	  <th:block layout:fragment="customCss"></th:block>
+	  <th:block layout:fragment="customTitle">
+	  	<title th:text="${title}"></title>
+	  </th:block>
+	  <th:block layout:fragment="customJs"></th:block>
+	  <th:block layout:fragment="customContent">
+	  	<table class="table">
+	  		<thead>
+	  			<tr class="success">
+	  				<th>로그인아이디</th>
+	  				<th>로그인날짜</th>
+	  				<th>로그아웃날짜</th>
+	  			</tr>
+	  		</thead>
+	  		<tbody>
+	  			<tr class="info" th:each="l : ${loginHistory}">
+	  				<td th:text="${l.loginId}"></td>
+	  				<td th:text="${l.loginDate}"></td>
+	  				<td th:text="${l.logoutDate}"></td>
+	  			</tr>
+	  		</tbody>
+	  	</table>
+	  	<nav style="text-align:center;">
+		  <ul class="pagination">
+		    <li>
+		      <a th:href="@{/getLoginHistory}" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		      </a>
+		    </li>
+		    <li><a th:if="${currentPage > 1}" th:href="@{getLoginHistory(currentPage=${currentPage - 1})}" aria-label="Previous">&lt;</a></li>
+		    <th:block th:if="${currentPage < 7 || lastPage <= 10}" th:each="num : ${#numbers.sequence(1,10)}">
+		    	<li><a th:if="${num <= lastPage}" th:href="@{getLoginHistory(currentPage=${num})}" th:text="${num}"></a></li>
+		    </th:block>
+		    <th:block th:unless="${currentPage < 7 || lastPage <= 10}" th:each="num : ${#numbers.sequence(currentPage-5,currentPage+4)}">
+		    	<li><a th:if="${num <= lastPage}" th:href="@{getLoginHistory(currentPage=${num})}" th:text="${num}"></a></li>
+		    </th:block>
+		    <li><a  th:if="${currentPage < lastPage}" th:href="@{getLoginHistory(currentPage=${currentPage + 1})}" aria-label="Next">&gt;</a></li>
+		    <li>
+		      <a th:href="@{/getLoginHistory(currentPage=${lastPage})}" aria-label="Next">
+		        <span aria-hidden="true">&raquo;</span>
+		      </a>
+		    </li>
+		  </ul>
+		</nav>
+	  </th:block>
+	  <th:block layout:fragment="customJsScript"></th:block>
+</html>
